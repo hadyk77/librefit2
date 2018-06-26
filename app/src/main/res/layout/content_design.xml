@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_margin="10dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2">
+
+        <ImageView
+            android:id="@+id/tshirt"
+            android:layout_width="132dp"
+            android:layout_height="186dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rate"
+            android:layout_alignStart="@+id/rate"
+            android:text="120 LE"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tshirt"
+            android:layout_centerHorizontal="true"
+            android:text="4.7"
+            android:textColor="#000" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="16dp"
+            android:layout_alignTop="@+id/rate"
+            android:layout_toRightOf="@id/rate"
+            android:src="@drawable/star" />
+
+    </RelativeLayout>
+
+</LinearLayout>

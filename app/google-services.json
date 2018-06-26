@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "1052406996663",
+    "firebase_url": "https://librefit3.firebaseio.com",
+    "project_id": "librefit3",
+    "storage_bucket": "librefit3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052406996663:android:cefcdbf01cc6ade7",
+        "android_client_info": {
+          "package_name": "com.project.librefit.librefit2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1052406996663-dis86h5q0p3ktoi4jkh7afnrdpf1juki.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.librefit.librefit2",
+            "certificate_hash": "4825c73c71838c31227643845ea3a77f0a55114e"
+          }
+        },
+        {
+          "client_id": "1052406996663-npqi7h170ah3gk9mltl6fh7t09e6hh41.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1052406996663-npqi7h170ah3gk9mltl6fh7t09e6hh41.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeFt5HjP-gkS5UOVkT78uo0Q1IPOMPQ3Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1052406996663-npqi7h170ah3gk9mltl6fh7t09e6hh41.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
