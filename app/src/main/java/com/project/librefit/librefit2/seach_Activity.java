@@ -2,7 +2,9 @@ package com.project.librefit.librefit2;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,13 +41,15 @@ private List<account_info> mList;
 private FirebaseRecyclerAdapter<account_info,viewholder> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seach_);
         intial();
        search_field.addTextChangedListener(new TextWatcher() {
+           int previousLength;
            @Override
            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                 previousLength=s.length();
            }
 
            @Override
@@ -53,22 +57,34 @@ private FirebaseRecyclerAdapter<account_info,viewholder> adapter;
 
 
 
+
            }
 
            @Override
            public void afterTextChanged(Editable s) {
-                  if(!s.toString().isEmpty()) {
-                      search2(s.toString());
-                  }
-                  else {
-                      int size=mList.size();
-                      mList.clear();
-                      recyclerView.setAdapter(search_adapter);
-                      search_adapter.notifyItemRangeRemoved(0,size);
-                      recyclerView.removeAllViewsInLayout();
 
 
-                  }
+            boolean   backSpace = previousLength > s.length();
+
+               if (backSpace) {
+                   Handler handler=new Handler();
+                   handler.postDelayed(new Runnable() {
+                       @Override
+                       public void run() {
+                           int size = mList.size();
+                           mList.clear();
+                           recyclerView.setAdapter(search_adapter);
+                           search_adapter.notifyItemRangeRemoved(0, size);
+                           recyclerView.removeAllViewsInLayout();
+                       }
+                   },300);
+
+
+
+               }
+               if (!s.toString().equals("")) {
+                   search2(s.toString());
+               }
            }
        });
 
@@ -103,10 +119,12 @@ private FirebaseRecyclerAdapter<account_info,viewholder> adapter;
         recyclerView.setAdapter(adapter);
          }
     private void search2(final String text){
-        mList.clear();
+
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mList.clear();
+                recyclerView.removeAllViews();
                  int counter=0;
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                     account_info info=(account_info)snapshot.getValue(account_info.class);

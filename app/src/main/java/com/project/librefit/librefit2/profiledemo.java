@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -44,11 +46,13 @@ import static android.app.PendingIntent.getActivity;
 public class profiledemo extends AppCompatActivity
 
         implements NavigationView.OnNavigationItemSelectedListener ,View.OnClickListener {
-    ImageView profile_pic, cover,imgvw,open_nav, follow,aboutme;
+    ImageView profile_pic, cover,imgvw,open_nav, follow;
     TextView username, email, user_nav, title;
     DrawerLayout nav;
     NavigationView navigationView;
     View hView;
+    EditText aboutme_text;
+    Button aboutme;
     ListView listView;
     nonsrollable profile_content;
     String[] items = {"settings", "logout", "rate us", "contact us"};
@@ -89,6 +93,13 @@ public class profiledemo extends AppCompatActivity
         });
         profile_pic.setOnClickListener(this);
         menu();
+        aboutme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aboutme_text.setEnabled(true);
+                aboutme_text.requestFocus();
+            }
+        });
 
     }
 
@@ -111,6 +122,9 @@ public class profiledemo extends AppCompatActivity
         cover = (ImageView) findViewById(R.id.cover);
         follow = findViewById(R.id.follow);
         search_object=(account_info) getIntent().getSerializableExtra("search");
+        aboutme_text=findViewById(R.id.aboutme_txt);
+        aboutme_text.setEnabled(false);
+        aboutme=findViewById(R.id.aboutme);
 
     }
 
@@ -263,11 +277,11 @@ public class profiledemo extends AppCompatActivity
         FirebaseUser user = mAuth.getCurrentUser();
         if(search_object!=null&&!search_object.UID.equals(user.getUid()))
         {
+            aboutme_text.setEnabled(false);
             LinearLayout cups=findViewById(R.id.cups);
             LinearLayout contact=findViewById(R.id.contact);
-            aboutme=findViewById(R.id.aboutme);
-            cups.setVisibility(View.GONE);
-            contact.setVisibility(View.GONE);
+            cups.setVisibility(View.VISIBLE);
+            contact.setVisibility(View.VISIBLE);
             aboutme.setVisibility(View.GONE);
             username.setText(search_object.name);
             Picasso.get().load(search_object.image_url).into(profile_pic);
@@ -279,6 +293,7 @@ public class profiledemo extends AppCompatActivity
             }
         }
         else {
+
             account_info info;
             if (user != null) {
                 for (UserInfo userInfo : user.getProviderData()) {
